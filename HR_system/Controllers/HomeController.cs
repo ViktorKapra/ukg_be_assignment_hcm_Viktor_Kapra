@@ -13,6 +13,7 @@ namespace HR_system.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
