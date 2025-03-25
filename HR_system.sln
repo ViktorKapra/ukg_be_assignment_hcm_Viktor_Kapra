@@ -5,7 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system", "HR_system\HR_system.csproj", "{C2059762-6AB8-4E5B-8055-0B87DAFBED57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "Data\Data.csproj", "{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.Data", "Data\HR_system.Data.csproj", "{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.BLogic", "HR_sustem.BLogic\HR_system.BLogic.csproj", "{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.Constants", "HR_system.Constants\HR_system.Constants.csproj", "{703A9892-9A9C-4197-B9D1-C021B4543E5A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

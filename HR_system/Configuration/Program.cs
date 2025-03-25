@@ -1,9 +1,12 @@
+using AutoMapper;
 using Data;
 using Data.Account;
+using HR_system.Configuration.Extensions;
+using HR_system.Mapper;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace HR_system
+namespace HR_system.Configuration
 {
     public class Program
     {
@@ -41,11 +44,21 @@ namespace HR_system
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.AddSingleton(new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            }).CreateMapper());
+
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddBussinessLogic();
 
 
             var app = builder.Build();
 
+            // Seeding roles and admin user
+            Seeder.Seed(app);
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

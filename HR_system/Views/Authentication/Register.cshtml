@@ -1,0 +1,59 @@
+﻿@model HR_system.Models.RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<h1>Register</h1>
+
+<form asp-action="Register" method="post">
+    <div>
+        <label asp-for="FirstName"></label>
+        <input asp-for="FirstName" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="LastName"></label>
+        <input asp-for="LastName" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="JobTitle"></label>
+        <input asp-for="JobTitle" />
+        <span asp-validation-for="JobTitle" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Department"></label>
+        <input asp-for="Department" />
+        <span asp-validation-for="Department" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Salary"></label>
+        <input asp-for="Salary" />
+        <span asp-validation-for="Salary" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Email"></label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["InvalidLogin"] != null)
+    {
+        <div class="text-danger">
+            <p>@ViewData.ModelState["InvalidRegister"]?.Errors[0].ErrorMessage</p>
+        </div>
+    }
+
+    <button type="submit">Register</button>
+</form>
