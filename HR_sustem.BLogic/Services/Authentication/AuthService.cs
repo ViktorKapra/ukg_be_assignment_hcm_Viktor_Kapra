@@ -3,6 +3,7 @@ using HR_sustem.BLogic.Services.Interfaces;
 using HR_system.BLogic.DTOs;
 using HR_system.Constants;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
 namespace HR_sustem.BLogic.Services.Authentication
@@ -19,7 +20,7 @@ namespace HR_sustem.BLogic.Services.Authentication
             _userManager = userManager;
         }
 
-        public async Task<SignInResult> LoginAsync(UserCredentialsDTO credentials)
+        public async Task<Microsoft.AspNetCore.Identity.SignInResult> LoginAsync(UserCredentialsDTO credentials)
         {
             var result = await _signInManager.PasswordSignInAsync(credentials.Email, credentials.Password, isPersistent: false, lockoutOnFailure: false);
             if (result.Succeeded)
@@ -49,6 +50,12 @@ namespace HR_sustem.BLogic.Services.Authentication
                 await _userManager.AddToRoleAsync(createdUser!, DefaultValuesConsnts.EMPLOYEE_ROLE);
             }
             return result;
+        }
+
+        [HttpGet]
+        public async Task Logout()
+        {
+            await _signInManager.SignOutAsync();
         }
     }
 }

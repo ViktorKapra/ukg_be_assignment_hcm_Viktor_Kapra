@@ -1,0 +1,60 @@
+﻿@using HR_system.Constants
+@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.JobTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Department)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Salary)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.JobTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Department)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Salary)
+            </td>
+            <td>
+                    @if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE) || User.IsInRole(DefaultValuesConsnts.MANAGER_ROLE))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>;
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>;
+                    }
+                    <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

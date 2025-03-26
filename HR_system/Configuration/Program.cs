@@ -41,9 +41,22 @@ namespace HR_system.Configuration
                 options.UseInMemoryDatabase(connectionString));
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+
+                options.LoginPath = "/Authentication/Login";
+                options.LogoutPath = "/Authentication/Logout";
+                options.SlidingExpiration = true;
+            });
+
 
             builder.Services.AddSingleton(new MapperConfiguration(mc =>
             {

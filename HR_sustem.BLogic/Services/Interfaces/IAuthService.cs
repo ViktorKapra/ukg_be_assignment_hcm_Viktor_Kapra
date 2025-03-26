@@ -7,6 +7,7 @@ namespace HR_sustem.BLogic.Services.Interfaces
     {
         public Task<SignInResult> LoginAsync(UserCredentialsDTO credentials);
         public Task<IdentityResult> RegisterAsync(UserDTO credentials);
+        public Task Logout();
 
     }
 }
