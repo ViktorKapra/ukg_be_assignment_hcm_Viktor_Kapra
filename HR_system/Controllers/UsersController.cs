@@ -88,7 +88,7 @@ namespace HR_system.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         [Authorize(Roles = managementRoles)]
         public async Task<IActionResult> Edit(UserViewModel editedUser)
         {

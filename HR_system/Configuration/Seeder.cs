@@ -12,71 +12,47 @@ namespace HR_system.Configuration
             {
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
                 var roles = new[] { "Employee", "Manager", "HR_Admin" };
-                foreach (var role in roles)
-                {
-                    {
-                        if (!await roleManager.RoleExistsAsync(role))
-                        {
-                            await roleManager.CreateAsync(new ApplicationRole(role));
-                        }
-
-                    }
-                }
+                await AddRoles(roleManager, roles);
 
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-                var adminExist = await userManager.Users.AnyAsync(u => u.Email == "Admin@HR.com");
+                await AddUser(userManager, roleManager, "HR_Admin", "Admin@HR.com", "Test_123", "Tom", "Sawyer", "Admin", "Main", 1000);
+                await AddUser(userManager, roleManager, "Manager", "Test@mail.com", "Test_123", "Piter", "Pan", "Manager", "Main", 1000);
+                await AddUser(userManager, roleManager, "Employee", "Test2@mail.com", "Test_123", "Piter", "Pan", "Manager", "Finance", 1000);
 
-                if (!adminExist)
+            }
+        }
+
+        private static async Task AddRoles(RoleManager<ApplicationRole> roleManager, string[] roles)
+        {
+            foreach (var role in roles)
+            {
+                if (!await roleManager.RoleExistsAsync(role))
                 {
-                    var user = Activator.CreateInstance<ApplicationUser>();
-                    user.UserName = "Admin@HR.com";
-                    user.Email = user.UserName;
-                    user.FirstName = "Admin";
-                    user.LastName = "HR";
-                    user.JobTitle = "HR";
-                    user.Department = "General Management";
-                    user.Salary = 1000;
-                    user.EmailConfirmed = true;
-                    var result = await userManager.CreateAsync(user, "Test_123");
-                    user = await userManager.FindByEmailAsync(user.Email);
-                    await userManager.AddToRoleAsync(user!, "HR_Admin");
+                    await roleManager.CreateAsync(new ApplicationRole(role));
                 }
+            }
+        }
 
-                var managerExist = await userManager.Users.AnyAsync(u => u.Email == "Test@mail.com");
+        private static async Task AddUser(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager,
+                             string role, string userName, string password, string firstName, string lastName, string jobTitle,
+                             string department, decimal salary)
+        {
+            var employeeExist = await userManager.Users.AnyAsync(u => u.Email == userName);
 
-                if (!managerExist)
-                {
-                    var user = Activator.CreateInstance<ApplicationUser>();
-                    user.UserName = "Test@mail.com";
-                    user.Email = user.UserName;
-                    user.FirstName = "Manager";
-                    user.LastName = "Something";
-                    user.JobTitle = "Manager";
-                    user.Department = "General Management";
-                    user.Salary = 1000;
-                    user.EmailConfirmed = true;
-                    var result = await userManager.CreateAsync(user, "Test_123");
-                    user = await userManager.FindByEmailAsync(user.Email);
-                    await userManager.AddToRoleAsync(user!, "Manager");
-                }
-
-                var employeeExist = await userManager.Users.AnyAsync(u => u.Email == "Test2@mail.com");
-
-                if (!employeeExist)
-                {
-                    var user = Activator.CreateInstance<ApplicationUser>();
-                    user.UserName = "Test2@mail.com";
-                    user.Email = user.UserName;
-                    user.FirstName = "Manager";
-                    user.LastName = "Something";
-                    user.JobTitle = "Employee";
-                    user.Department = "Param";
-                    user.Salary = 1000;
-                    user.EmailConfirmed = true;
-                    var result = await userManager.CreateAsync(user, "Test_123");
-                    user = await userManager.FindByEmailAsync(user.Email);
-                    await userManager.AddToRoleAsync(user!, "Employee");
-                }
+            if (!employeeExist)
+            {
+                var user = Activator.CreateInstance<ApplicationUser>();
+                user.UserName = userName;
+                user.Email = user.UserName;
+                user.FirstName = firstName;
+                user.LastName = lastName;
+                user.JobTitle = jobTitle;
+                user.Department = department;
+                user.Salary = salary;
+                user.EmailConfirmed = true;
+                var result = await userManager.CreateAsync(user, password);
+                user = await userManager.FindByEmailAsync(user.Email);
+                await userManager.AddToRoleAsync(user!, role);
             }
         }
     }

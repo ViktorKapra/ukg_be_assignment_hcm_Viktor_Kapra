@@ -12,7 +12,8 @@ namespace HR_system.Mapper
         {
             CreateMap<LoginViewModel, UserCredentialsDTO>();
             CreateMap<RegisterViewModel, UserDTO>();
-            CreateMap<UserDTO, ApplicationUser>().ForMember(dest => dest.Id, opt => opt.DoNotAllowNull());
+            CreateMap<UserDTO, ApplicationUser>().ForMember(dest => dest.Id, opt => opt.DoNotAllowNull())
+                .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email));
             CreateMap<ApplicationUser, UserDTO>();
             CreateMap<UserDTO, UserViewModel>().ReverseMap();
             CreateMap<UserFilterDTO, Query<ApplicationUser>>()

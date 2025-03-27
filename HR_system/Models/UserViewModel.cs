@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using HR_system.Constants;
+using System.ComponentModel.DataAnnotations;
 
 namespace HR_system.Models
 {
@@ -10,9 +11,13 @@ namespace HR_system.Models
         [EmailAddress(ErrorMessage = "Invalid email address")]
         public string Email { get; set; }
 
+        [RegularExpression(ValidationConsts.NAME_REGEX,
+        ErrorMessage = "Only letters are allowed.")]
         [Required(ErrorMessage = "First name is required")]
         public string FirstName { get; set; }
 
+        [RegularExpression(ValidationConsts.NAME_REGEX,
+        ErrorMessage = "Only letters are allowed.")]
         [Required(ErrorMessage = "Last name is required")]
         public string LastName { get; set; }
 

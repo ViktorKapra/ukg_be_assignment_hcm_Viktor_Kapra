@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system", "HR_system\HR_s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.Data", "Data\HR_system.Data.csproj", "{7441CBFA-D01A-46A1-91BB-07E8719DEEDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.BLogic", "HR_sustem.BLogic\HR_system.BLogic.csproj", "{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.BLogic", "HR_sustem.BLogic\HR_system.BLogic.csproj", "{C0A7B21B-64F9-40CD-9974-BAB3A975AAB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.Constants", "HR_system.Constants\HR_system.Constants.csproj", "{703A9892-9A9C-4197-B9D1-C021B4543E5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.Constants", "HR_system.Constants\HR_system.Constants.csproj", "{703A9892-9A9C-4197-B9D1-C021B4543E5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.Test", "HR_system.Test\HR_system.Test.csproj", "{FBB1A9F0-1A46-4C10-9351-66D02763196F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{703A9892-9A9C-4197-B9D1-C021B4543E5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBB1A9F0-1A46-4C10-9351-66D02763196F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBB1A9F0-1A46-4C10-9351-66D02763196F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBB1A9F0-1A46-4C10-9351-66D02763196F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBB1A9F0-1A46-4C10-9351-66D02763196F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

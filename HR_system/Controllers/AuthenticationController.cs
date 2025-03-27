@@ -28,8 +28,9 @@ namespace HR_system.Controllers
             }
             return View();
         }
-        [HttpPost]
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             if (!ModelState.IsValid)
@@ -55,6 +56,7 @@ namespace HR_system.Controllers
             return View();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterAsync(RegisterViewModel model)
         {
             if (User.Identity != null && User.Identity.IsAuthenticated)
