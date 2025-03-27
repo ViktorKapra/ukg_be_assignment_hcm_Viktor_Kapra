@@ -25,6 +25,12 @@
             <th>
                 @Html.DisplayNameFor(model => model.Salary)
             </th>
+            @if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE))
+            {
+                <th>
+                    @Html.DisplayNameFor(model => model.Role)
+                </th>
+            }
             <th></th>
         </tr>
     </thead>
@@ -46,12 +52,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Salary)
             </td>
-            <td>
+            @if(User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE))
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Role)
+                    </td>
+                }
+                <td>
                     @if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE) || User.IsInRole(DefaultValuesConsnts.MANAGER_ROLE))
                     {
                         <a asp-action="Edit" asp-route-id="@item.Id" class="action-btn">Edit</a>;
                         <a asp-action="Delete" asp-route-id="@item.Id" class="action-btn">Delete</a>
-                        ;
                     }
                     <a asp-action="Details" asp-route-id="@item.Id" class="action-btn"> Details </a>
             </td>

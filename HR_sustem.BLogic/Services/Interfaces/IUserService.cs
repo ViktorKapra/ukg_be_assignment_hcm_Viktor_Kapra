@@ -12,5 +12,6 @@ namespace HR_system.BLogic.Services.Interfaces
         public Task<IdentityResult> EditUserAsync(UserDTO userDTO);
         public Task<UserDTO> GetUserByClaimAsync(ClaimsPrincipal userClaims);
         public Task<IdentityResult> DeleteUserAsync(Guid guid);
+        public Task ChangeRole(Guid userId, string role);
     }
 }

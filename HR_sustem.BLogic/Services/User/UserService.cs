@@ -37,8 +37,15 @@ namespace HR_system.BLogic.Services.User
         }
         public async Task<UserDTO> GetUserByIdAsync(Guid id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            return _mapper.Map<UserDTO>(user);
+            ApplicationUser user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                throw new Exception("User not found");
+            }
+            var userDTO = _mapper.Map<UserDTO>(user);
+            IList<string> roles = await _userManager.GetRolesAsync(user);
+            userDTO.Role = roles[0];
+            return userDTO;
         }
 
         public async Task<UserDTO> GetUserByClaimAsync(ClaimsPrincipal userClaims)
@@ -56,8 +63,15 @@ namespace HR_system.BLogic.Services.User
         {
             var query = _mapper.Map<Query<ApplicationUser>>(filterDTO);
             var entities = await _context.Users.Where(query.Expression).ToListAsync();
-            var userDTOs = entities.Select(x => _mapper.Map<UserDTO>(x)).ToList();
-            return userDTOs;
+            UserDTO[] userDTOs = await Task.WhenAll(entities.Select(async x =>
+            {
+                var userDTO = _mapper.Map<UserDTO>(x);
+                var roles = await _userManager.GetRolesAsync(x);
+                userDTO.Role = roles.First();
+                return userDTO;
+            }));
+
+            return userDTOs.ToList();
         }
         public async Task<IdentityResult> EditUserAsync(UserDTO userDTO)
         {
@@ -73,6 +87,21 @@ namespace HR_system.BLogic.Services.User
                 return await _userManager.DeleteAsync(user);
             }
             return IdentityResult.Failed();
+
+        }
+        public async Task ChangeRole(Guid userId, string roleName)
+        {
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+            if (user != null)
+            {
+                var roles = await _userManager.GetRolesAsync(user);
+                await _userManager.RemoveFromRolesAsync(user, roles);
+                await _userManager.AddToRoleAsync(user, roleName);
+            }
+            else
+            {
+                throw new Exception("User not found!");
+            }
 
         }
     }

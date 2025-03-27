@@ -1,10 +1,12 @@
 ﻿using HR_system.Constants;
 using System.ComponentModel.DataAnnotations;
 
+
 namespace HR_system.Models
 {
     public class UserViewModel
     {
+
         public Guid? Id { get; set; }
 
         [Required(ErrorMessage = "Email is required")]
@@ -30,5 +32,9 @@ namespace HR_system.Models
         [Required(ErrorMessage = "Salary is required")]
         [Range(0, double.MaxValue, ErrorMessage = "Invalid salary")]
         public decimal Salary { get; set; }
+
+        [Required]
+        [RegularExpression(ValidationConsts.ROLES_REGEX, ErrorMessage = "Invalid role")]
+        public string Role { get; set; }
     }
 }

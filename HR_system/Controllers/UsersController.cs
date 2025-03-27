@@ -7,6 +7,7 @@ using HR_system.Constants;
 using HR_system.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static HR_system.Constants.DefaultValuesConsnts;
 
 namespace HR_system.Controllers
 {
@@ -16,7 +17,7 @@ namespace HR_system.Controllers
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly IAuthService _authService;
-        private const string managementRoles = DefaultValuesConsnts.ADMIN_ROLE + "," + DefaultValuesConsnts.MANAGER_ROLE;
+        private const string managementRoles = ADMIN_ROLE + "," + MANAGER_ROLE;
 
         public UsersController(ApplicationDbContext context, IUserService userService,
                                 IMapper mapper, IAuthService authService)
@@ -32,11 +33,11 @@ namespace HR_system.Controllers
             List<UserDTO> listedUsers = new List<UserDTO>();
             var currentUser = await _userService.GetUserByClaimAsync(User);
 
-            if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE))
+            if (User.IsInRole(ADMIN_ROLE))
             {
                 listedUsers.AddRange(await _userService.FilterAsync(userFilterDTO));
             }
-            else if (User.IsInRole(DefaultValuesConsnts.MANAGER_ROLE))
+            else if (User.IsInRole(MANAGER_ROLE))
             {
                 userFilterDTO.Department = currentUser.Department;
                 listedUsers.AddRange(await _userService.FilterAsync(userFilterDTO));
@@ -102,6 +103,12 @@ namespace HR_system.Controllers
                     return Unauthorized();
                 }
                 var result = await _userService.EditUserAsync(_mapper.Map<UserDTO>(editedUser));
+
+                if (User.IsInRole(ADMIN_ROLE))
+                {
+                    await _userService.ChangeRole(editedUser.Id.Value, editedUser.Role);
+                }
+
                 if (!result.Succeeded)
                 {
                     return RedirectToAction("Error", "Home");
