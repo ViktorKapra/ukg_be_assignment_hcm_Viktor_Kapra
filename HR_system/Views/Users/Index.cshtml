@@ -49,10 +49,11 @@
             <td>
                     @if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE) || User.IsInRole(DefaultValuesConsnts.MANAGER_ROLE))
                     {
-                        <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>;
-                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>;
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="action-btn">Edit</a>;
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="action-btn">Delete</a>
+                        ;
                     }
-                    <a asp-action="Details" asp-route-id="@item.Id"> Details </a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="action-btn"> Details </a>
             </td>
         </tr>
 }

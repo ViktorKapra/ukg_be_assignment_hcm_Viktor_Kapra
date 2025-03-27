@@ -1,5 +1,7 @@
-﻿@model UserViewModel
-
+﻿@using Data.Account
+@using HR_system.Constants
+@using Microsoft.AspNetCore.Identity
+@model UserViewModel
 @{
     ViewData["Title"] = "Details";
 }
@@ -51,6 +53,9 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (User.IsInRole(DefaultValuesConsnts.ADMIN_ROLE) || User.IsInRole(DefaultValuesConsnts.MANAGER_ROLE))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="action-btn">Edit</a>
+    }
+    <a asp-action="Index" class="action-btn">Back to List</a>
 </div>
