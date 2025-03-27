@@ -24,7 +24,6 @@ namespace HR_system.BLogic.Services.User
             _userManager = userManager;
             _mapper = mapper;
             _context = context;
-            _context = context;
         }
         public async Task<IdentityResult> ChangePasswordAsync(Guid id, string oldPassword, string newPassword)
         {

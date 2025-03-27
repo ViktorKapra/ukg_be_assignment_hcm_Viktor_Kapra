@@ -74,10 +74,12 @@ namespace HR_system.Configuration
 
                 Seeder.Seed(app);
 
+                app.UseExceptionHandler("/Home/Error");
                 // Configure the HTTP request pipeline.
                 if (app.Environment.IsDevelopment())
                 {
                     app.UseMigrationsEndPoint();
+
                 }
                 else
                 {

@@ -11,6 +11,9 @@ using static HR_system.Constants.DefaultValuesConsnts;
 
 namespace HR_system.Controllers
 {
+    /// <summary>
+    /// Controller for managing users in the HR system.
+    /// </summary>
     [Authorize]
     public class UsersController : Controller
     {
@@ -27,6 +30,10 @@ namespace HR_system.Controllers
             _authService = authService;
         }
 
+        /// <summary>
+        /// Displays the list of users based on the user's role and department.
+        /// </summary>
+        /// <returns>The view containing the list of users.</returns>
         public async Task<IActionResult> Index()
         {
             UserFilterDTO userFilterDTO = new UserFilterDTO();
@@ -50,6 +57,11 @@ namespace HR_system.Controllers
             return View(listedUsers.Select(x => _mapper.Map<UserViewModel>(x)).ToList());
         }
 
+        /// <summary>
+        /// Displays the details of a specific user.
+        /// </summary>
+        /// <param name="id">The ID of the user.</param>
+        /// <returns>The view containing the user details.</returns>
         public async Task<IActionResult> Details(Guid? id)
         {
             if (id == null)
@@ -66,6 +78,11 @@ namespace HR_system.Controllers
             return View(_mapper.Map<UserViewModel>(applicationUser));
         }
 
+        /// <summary>
+        /// Displays the edit view for a specific user.
+        /// </summary>
+        /// <param name="id">The ID of the user.</param>
+        /// <returns>The edit view for the user.</returns>
         [Authorize(Roles = managementRoles)]
         public async Task<IActionResult> Edit(Guid? id)
         {
@@ -88,6 +105,12 @@ namespace HR_system.Controllers
             return View(_mapper.Map<UserViewModel>(searchedUser));
         }
 
+        /// <summary>
+        /// Handles the post request to edit a user. Can only be accessed by managers and admins.
+        /// Only admins can change the role of a user.
+        /// </summary>
+        /// <param name="editedUser">The edited user data.</param>
+        /// <returns>The appropriate action result based on the edit operation.</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = managementRoles)]
@@ -119,6 +142,11 @@ namespace HR_system.Controllers
             return View(editedUser);
         }
 
+        /// <summary>
+        /// Displays the delete view for a specific user.
+        /// </summary>
+        /// <param name="id">The ID of the user.</param>
+        /// <returns>The delete view for the user.</returns>
         [Authorize(Roles = managementRoles)]
         public async Task<IActionResult> Delete(Guid? id)
         {
@@ -142,6 +170,11 @@ namespace HR_system.Controllers
             return View(_mapper.Map<UserViewModel>(searchedUser));
         }
 
+        /// <summary>
+        /// Handles the post request to delete a user.
+        /// </summary>
+        /// <param name="id">The ID of the user to delete.</param>
+        /// <returns>The appropriate action result based on the delete operation.</returns>
         [Authorize(Roles = managementRoles)]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
