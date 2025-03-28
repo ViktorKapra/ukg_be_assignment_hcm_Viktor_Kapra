@@ -28,4 +28,18 @@ To run the application, follow these steps:
     ```bash
     dotnet run
     ```
+## Architecture 
+The architecture of this Human Capital Management app is based on the Model-View-Controller (MVC) pattern. This pattern separates the application into three main components:
+
+### Class Libraries
+The project consists of several class libraries that encapsulate different aspects of the application:
+
+- Core API (__HR_system__): Contains the core business logic and domain models.
+- Data Library(__HR_system.Data__): Manages data access and includes the repository pattern for data operations.
+- Service Library (__HR_system.BLogic__): Implements various services used across the application, such as data manipulation and business rules.
+- Constants Library (__HR_system.Constants__): It manages the Constants in the solution
+- Test Library (__HR_system.Test__): It keeps unit and infrastructure tests
+
+### In-Memory Database
+For simplicity and ease of development, the application uses an in-memory database.
     
