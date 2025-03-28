@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Data;
-using HR_sustem.BLogic.Services.Interfaces;
 using HR_system.BLogic.DTOs;
 using HR_system.BLogic.Services.Interfaces;
 using HR_system.Constants;

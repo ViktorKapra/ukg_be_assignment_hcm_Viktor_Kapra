@@ -1,5 +1,4 @@
-﻿using HR_sustem.BLogic.Services.Authentication;
-using HR_sustem.BLogic.Services.Interfaces;
+﻿using HR_system.BLogic.Services.Authentication;
 using HR_system.BLogic.Services.Interfaces;
 using HR_system.BLogic.Services.User;
 

@@ -1,12 +1,12 @@
 ﻿using Data.Account;
-using HR_sustem.BLogic.Services.Interfaces;
 using HR_system.BLogic.DTOs;
+using HR_system.BLogic.Services.Interfaces;
 using HR_system.Constants;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 
-namespace HR_sustem.BLogic.Services.Authentication
+namespace HR_system.BLogic.Services.Authentication
 {
     public class AuthService : IAuthService
     {

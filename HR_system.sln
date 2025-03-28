@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.BLogic", "HR_sust
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.Constants", "HR_system.Constants\HR_system.Constants.csproj", "{703A9892-9A9C-4197-B9D1-C021B4543E5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HR_system.Test", "HR_system.Test\HR_system.Test.csproj", "{FBB1A9F0-1A46-4C10-9351-66D02763196F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HR_system.Test", "HR_system.Test\HR_system.Test.csproj", "{FBB1A9F0-1A46-4C10-9351-66D02763196F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
